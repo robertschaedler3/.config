@@ -32,7 +32,7 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";"
 $PwshProfile = "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
 
 New-Item $PwshProfile -ItemType File -Force | Out-Null
-"oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\bubbles.omp.json" | Out-File $PwshProfile -Append
+"oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\bubbles.omp.json | Invoke-Expression" | Out-File $PwshProfile -Append
 
 # Windows Terminal
 # ...

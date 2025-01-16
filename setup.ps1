@@ -25,8 +25,10 @@ winget install -e --id JanDeDobbeleer.OhMyPosh
 # git config --global user.email ""
 
 # PowerShell
-New-Item $PROFILE -ItemType File -Force | Out-Null
-"oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\bubbles.omp.json" | Out-File $PROFILE -Append
+$PwshProfile = pwsh -c '$PROFILE'
+
+New-Item $PwshProfile -ItemType File -Force | Out-Null
+"oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\bubbles.omp.json" | Out-File $PwshProfile -Append
 
 # Windows Terminal
 # ...

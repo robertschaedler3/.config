@@ -5,6 +5,8 @@ $DataDrives = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Root -match
 if ($DataDrives) {
     Write-Verbose "Data drive found: $($DataDrives[0].Root)"
     $Workspace = "$($DataDrives[0].Root)\git"
+} else {
+    Write-Verbose "No data drive found, using default workspace: $Workspace"
 }
 
 New-Item -Path $Workspace -ItemType Directory -Force | Out-Null
@@ -15,6 +17,8 @@ winget install -e --id Git.Git
 winget install -e --id Microsoft.PowerShell
 winget install -e --id Microsoft.VisualStudioCode
 winget install -e --id JanDeDobbeleer.OhMyPosh
+
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
 # GitHub
 # gh auth login

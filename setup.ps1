@@ -14,9 +14,10 @@ New-Item -Path $Workspace -ItemType Directory -Force | Out-Null
 winget install -e --id Docker.DockerDesktop
 winget install -e --id GitHub.cli
 winget install -e --id Git.Git
+winget install -e --id JanDeDobbeleer.OhMyPosh
 winget install -e --id Microsoft.PowerShell
 winget install -e --id Microsoft.VisualStudioCode
-winget install -e --id JanDeDobbeleer.OhMyPosh
+# winget install -e --id Rustlang.Rustup
 
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 

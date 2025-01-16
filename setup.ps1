@@ -16,8 +16,8 @@ winget install -e --id Microsoft.PowerShell
 winget install -e --id Microsoft.VisualStudioCode
 winget install -e --id JanDeDobbeleer.OhMyPosh
 
-gh auth login
-gh repo clone 'https://github.com/robertschaedler3/.config' "$Workspace/.config"
+# gh auth login
+# gh repo clone 'https://github.com/robertschaedler3/.config' "$Workspace/.config"
 
 # TODO: git username and email
 

@@ -1,5 +1,9 @@
 [CmdletBinding()]
-param ()
+param (
+    [Parameter()]
+    [ValidateSet('c/c++', 'rust', 'powershell')]
+    [string[]] $Features = @()
+)
 
 $Workspace = "$HOME\git"
 $DataDrives = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Root -match '^D:' }
@@ -14,10 +18,12 @@ if ($DataDrives) {
 New-Item -Path $Workspace -ItemType Directory -Force | Out-Null
 
 function Install-WingetPackage {
+    [CmdletBinding()]
     param ( 
         [Parameter(Mandatory, ValueFromPipeline)]
         [string] $PackageName
     )
+
     Write-Verbose "$PackageName"
     
     winget install -e --id $PackageName
@@ -30,8 +36,11 @@ $Packages = @(
     "JanDeDobbeleer.OhMyPosh",
     "Microsoft.PowerShell",
     "Microsoft.VisualStudioCode",
-    "Rustlang.Rustup"
 )
+
+if ($Features -contains 'rust') {
+    $Packages += "RustLang.Rustup"
+}
 
 $Packages | ForEach-Object { Install-WingetPackage $_ }
 
@@ -48,6 +57,11 @@ $PwshProfile = "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
 
 New-Item $PwshProfile -ItemType File -Force | Out-Null
 "oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\bubbles.omp.json | Invoke-Expression" | Out-File $PwshProfile -Append
+
+if ($Features -contains 'powershell') {
+    # Install-Module PSDepend 
+    # Invoke-PSDepend ...
+}
 
 # Windows Terminal
 # ...

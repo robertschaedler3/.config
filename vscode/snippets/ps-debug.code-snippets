@@ -1,0 +1,16 @@
+{
+	"PowerShell Debug": {
+		"prefix": ["psdebug", "psd"],
+		"body": [
+			"Write-Host \"$($${2:variable} | ConvertTo-Json -Depth 32 -Compress)\""
+		],
+		"description": "ConvertTo-Json"
+	},
+	"PowerShell Debug (Labeled)": {
+		"prefix": ["psdebug-label", "psdl"],
+		"body": [
+			"Write-Host \"${1:LABEL} = $($${2:variable} | ConvertTo-Json -Depth 32 -Compress)\""
+		],
+		"description": "ConvertTo-Json"
+	},
+}
